@@ -125,4 +125,4 @@ SELECT cod_locacao, fitas.descricao AS [Nome fita], tipos.descricao AS [Tipo fit
 SELECT * FROM fitas WHERE fk_cod_tipo = 2;
 
 -- r) Selecione todas as fitas alugadas pelo Silvio Santos, exibindo o nome da fita, a descrição do tipo e o valor, ordenadas pelo valor de locação, em ordem decrescente.
-SELECT 
+SELECT fitas.descricao AS [Nome fita], tipos.descricao AS [Tipo fita], valor AS [Valor] FROM locacoes INNER JOIN fitas on locacoes.fk_cod_fita = fitas.cod_fita INNER JOIN tipos on fitas.cod_fita = tipos.cod_tipo WHERE fk_cod_cliente = 1 ORDER BY [valor] DESC;

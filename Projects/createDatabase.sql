@@ -3,10 +3,10 @@ GO
 IF NOT EXISTS (
  SELECT name
  FROM sys.databases
- WHERE name = N'TutorialDB'
+ WHERE name = N'NomeDB'
 )
- CREATE DATABASE [TutorialDB];
+ CREATE DATABASE [NomeDB];
 GO
 IF SERVERPROPERTY('ProductVersion') > '12'
- ALTER DATABASE [TutorialDB] SET QUERY_STORE=ON;
+ ALTER DATABASE [NomeDB] SET QUERY_STORE=ON;
 GO
