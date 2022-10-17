@@ -79,38 +79,38 @@ SELECT *
 	WHERE nome LIKE '%a%'
 
 -- b) Selecione todas as locações com valor entre 3 e 5 por ordem de valor
-SELECT valor
+SELECT cod_locacao AS [Codigo locacao], valor AS [Valor locacao]
 	FROM locacoes
 	WHERE valor BETWEEN 3 AND 5
 	ORDER BY valor ASC;
 
--- c) Selecione todas as fitas locadas para o cliente no 3 e cujo valor foi menor ou igual a 4
-SELECT fk_cod_fita
+-- c) Selecione todas as fitas locadas para o cliente número 3 e cujo valor foi menor ou igual a 4
+SELECT fk_cod_fita AS [Codigo fita], fk_cod_cliente AS [Codigo cliente]
 	FROM locacoes
-	WHERE fk_cod_cliente = 3;
+	WHERE fk_cod_cliente = 3 AND valor <= 4;
 
 -- d) Selecione a quantidade de fitas locadas agrupadas pelo código da fita
-SELECT fk_cod_fita, COUNT(*) AS [Total de fitas]
+SELECT fk_cod_fita AS [Codigo fita], COUNT(*) AS [Total de fitas]
 	FROM locacoes
 	GROUP BY fk_cod_fita;
 
 -- e) Selecione a soma do valor das fitas locadas agrupadas pelo código da fita
-SELECT fk_cod_fita, SUM(valor) AS [Soma de fitas]
+SELECT fk_cod_fita AS [Codigo fita], SUM(valor) AS [Soma de fitas]
 	FROM locacoes
 	GROUP BY fk_cod_fita;
 
 -- f) Selecione o valor médio gasto em fitas agrupados por cliente
-SELECT fk_cod_cliente, AVG(valor) AS [Valor medio]
+SELECT fk_cod_cliente AS [Codigo cliente], AVG(valor) AS [Valor medio]
 	FROM locacoes
 	GROUP BY fk_cod_cliente;
 
 -- g) Descubra o maior valor de locação por fita
-SELECT fk_cod_fita, MAX(valor) AS [Maior valor]
+SELECT fk_cod_fita AS [Codigo fita], MAX(valor) AS [Maior valor]
 	FROM locacoes
 	GROUP BY fk_cod_fita;
 
 -- h) Descubra o menor valor de locação por cliente
-SELECT fk_cod_cliente, MIN(valor) AS [Menor valor]
+SELECT fk_cod_cliente AS [Codigo cliente], MIN(valor) AS [Menor valor]
 	FROM locacoes
 	GROUP BY fk_cod_cliente;
 
@@ -144,10 +144,11 @@ SELECT *
 	FROM locacoes 
 		INNER JOIN clientes 
 				on locacoes.fk_cod_cliente = clientes.cod_cliente
-	WHERE valor BETWEEN 3 AND 5 AND clientes.nome LIKE '%o%';
+	WHERE valor BETWEEN 3 AND 5 
+		AND clientes.nome LIKE '%o%';
 
 -- n) Selecione o Código da locação, o Nome da Fita e o Nome do cliente de todas as locações
-SELECT cod_locacao, fitas.descricao, clientes.nome
+SELECT cod_locacao AS [Codigo locacao], fitas.descricao AS [Nome fita], clientes.nome AS [Nome cliente]
 	FROM locacoes 
 		INNER JOIN fitas 
 				on locacoes.fk_cod_fita = fitas.cod_fita
@@ -155,7 +156,7 @@ SELECT cod_locacao, fitas.descricao, clientes.nome
 				on locacoes.fk_cod_cliente = clientes.cod_cliente;
 
 -- o) Selecione o Código da locação, o Nome da Fita e o Nome do cliente de todas as locações cujo código da fita seja diferente de 2 por ordem crescente de nome do cliente
-SELECT cod_locacao, fitas.descricao, clientes.nome
+SELECT cod_locacao AS [Codigo locacao], fitas.descricao AS [Nome fita], clientes.nome AS [Nome cliente]
 	FROM locacoes 
 		INNER JOIN fitas 
 				on locacoes.fk_cod_fita = fitas.cod_fita
@@ -165,7 +166,7 @@ SELECT cod_locacao, fitas.descricao, clientes.nome
 	ORDER BY clientes.nome;
 
 -- p) Selecione o Nome da Fita, o Tipo da Fita, o Valor da locação e o Nome do cliente de todas as locações por ordem de nome da fita decrescente 
-SELECT cod_locacao, fitas.descricao AS [Nome fita], tipos.descricao AS [Tipo fita], valor AS [Valor], clientes.nome AS [Nome cliente]
+SELECT cod_locacao AS [Codigo locacao], fitas.descricao AS [Nome fita], tipos.descricao AS [Tipo fita], valor AS [Valor], clientes.nome AS [Nome cliente]
 	FROM locacoes 
 		INNER JOIN fitas 
 				on locacoes.fk_cod_fita = fitas.cod_fita
@@ -173,7 +174,7 @@ SELECT cod_locacao, fitas.descricao AS [Nome fita], tipos.descricao AS [Tipo fit
 				on locacoes.fk_cod_cliente = clientes.cod_cliente 
 		INNER JOIN tipos 
 				on fitas.cod_fita = tipos.cod_tipo
-	ORDER BY fitas.descricao;
+	ORDER BY fitas.descricao DESC;
 
 -- q) Selecione todas as fitas do tipo ação
 SELECT * 
@@ -215,8 +216,8 @@ SELECT fitas.descricao AS [Nome fita], COUNT(locacoes.fk_cod_fita) AS [Soma loca
 				on locacoes.fk_cod_fita = fitas.cod_fita
 	GROUP BY fitas.descricao;
 
--- v) ? Selecione apenas os tipos de fitas que tem ao menos uma fita correspondente
-SELECT cod_tipo
+-- v) Selecione apenas os tipos de fitas que tem ao menos uma fita correspondente
+SELECT DISTINCT cod_tipo AS [Codigo tipo]
 	FROM tipos
 		LEFT JOIN fitas
 				on tipos.cod_tipo = fitas.fk_cod_tipo
@@ -241,7 +242,7 @@ SELECT *
 				on clientes.cod_cliente = locacoes.fk_cod_cliente;
 
 -- 5) Selecione o nome do cliente, o nome da fita e o nome do tipo apenas dos clientes que já efetuaram ao menos 1 locação. Ordenados pelos 3 campos solicitados.
-SELECT clientes.nome, fitas.descricao, tipos.descricao
+SELECT clientes.nome AS [Nome cliente], fitas.descricao AS [Nome fita], tipos.descricao AS [Tipo fita]
 	FROM locacoes 
 		INNER JOIN fitas 
 				on locacoes.fk_cod_fita = fitas.cod_fita
@@ -249,4 +250,46 @@ SELECT clientes.nome, fitas.descricao, tipos.descricao
 				on locacoes.fk_cod_cliente = clientes.cod_cliente
 		INNER JOIN tipos 
 				on fitas.fk_cod_tipo = tipos.cod_tipo
-	WHERE locacoes.fk_cod_cliente != null
+	ORDER BY clientes.nome;
+
+-- 6) Selecione todos os clientes que já efetuaram ao menos 2 locações.
+SELECT clientes.nome AS [Nome cliente], COUNT(*) AS [Total fitas alugadas por cliente]
+	FROM locacoes 
+		INNER JOIN clientes 
+				on locacoes.fk_cod_cliente = clientes.cod_cliente
+	GROUP BY clientes.nome
+	HAVING COUNT(*) >= 2;
+
+-- 7) Selecione a descrição do tipo apenas daqueles que já tiveram ao menos 4 locações.
+SELECT tipos.descricao AS [Tipo fita], COUNT(locacoes.fk_cod_fita) AS [Soma locacoes da fita]
+	FROM locacoes 
+		INNER JOIN fitas 
+				on locacoes.fk_cod_fita = fitas.cod_fita
+		INNER JOIN tipos
+				on fitas.fk_cod_tipo = tipos.cod_tipo
+	GROUP BY tipos.descricao
+	HAVING COUNT(locacoes.fk_cod_fita) >= 4;
+
+-- 8) Selecione apenas os clientes que nunca alugaram.
+SELECT clientes.nome AS [Nome cliente]
+	FROM clientes
+		LEFT OUTER JOIN locacoes
+					on clientes.cod_cliente = locacoes.fk_cod_cliente
+	WHERE cod_locacao IS NULL;
+
+-- 9) Selecione os tipos que não possuem fitas cadastradas.
+SELECT tipos.descricao AS [Tipo fita]
+	FROM tipos
+		INNER JOIN fitas
+				on tipos.cod_tipo = fitas.cod_fita
+		LEFT OUTER JOIN locacoes
+					on fitas.cod_fita = locacoes.fk_cod_fita
+	WHERE fk_cod_fita IS NULL;
+
+-- 10) Selecione apenas o nome dos clientes que já efetuaram mais de 12,00 em locações.
+SELECT clientes.nome AS [Nome cliente], SUM(locacoes.valor) AS [Soma valor]
+	FROM clientes
+		INNER JOIN locacoes
+				on clientes.cod_cliente = locacoes.fk_cod_cliente
+	GROUP BY clientes.nome
+	HAVING SUM(locacoes.valor) = 12;
