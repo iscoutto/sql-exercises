@@ -35,37 +35,37 @@ CREATE TABLE locacoes
 );
 
 -- Inserindo os dados na tabela Clientes
-INSERT INTO clientes VALUES (1, 'Silvio Santos');
-INSERT INTO clientes VALUES(2, 'Xuxa');
-INSERT INTO clientes VALUES(3, 'Ratinho');
-INSERT INTO clientes VALUES(4, 'Teobaldo');
-INSERT INTO clientes VALUES(5, 'Bob Esponja');
+INSERT INTO clientes VALUES (1, 'Silvio Santos'),
+							(2, 'Xuxa'),
+							(3, 'Ratinho'),
+							(4, 'Teobaldo'),
+							(5, 'Bob Esponja');
 
 -- Inserindo os dados na tabela Tipos
-INSERT INTO tipos VALUES(1, 'Drama');
-INSERT INTO tipos VALUES(2, 'Acao');
-INSERT INTO tipos VALUES(3, 'Terror');
-INSERT INTO tipos VALUES(4, 'Ficcao');
-INSERT INTO tipos VALUES(5, 'Documentario');
+INSERT INTO tipos VALUES(1, 'Drama'),
+						(2, 'Acao'),
+						(3, 'Terror'),
+						(4, 'Ficcao'),
+						(5, 'Documentario');
 
 -- Inserindo os dados na tabela Fitas
-INSERT INTO fitas VALUES(1, 'Titanic', 1);
-INSERT INTO fitas VALUES(2, 'Kill Bill', 2);
-INSERT INTO fitas VALUES(3, 'O Massacre da serra eletrica', 3);
-INSERT INTO fitas VALUES(4, 'Os outros', 3);
-INSERT INTO fitas VALUES(5, 'O Grande Dragao Branco', 2);
+INSERT INTO fitas VALUES(1, 'Titanic', 1),
+						(2, 'Kill Bill', 2),
+						(3, 'O Massacre da serra eletrica', 3),
+						(4, 'Os outros', 3),
+						(5, 'O Grande Dragao Branco', 2);
 
 -- Inserindo os dados na tabela Locacoes
-INSERT INTO locacoes VALUES(1, 2, 5, 1);
-INSERT INTO locacoes VALUES(2, 3, 4, 2);
-INSERT INTO locacoes VALUES(3, 1, 5, 3);
-INSERT INTO locacoes VALUES(4, 1, 3, 2);
-INSERT INTO locacoes VALUES(5, 3, 2, 1);
-INSERT INTO locacoes VALUES(6, 3, 5, 3);
-INSERT INTO locacoes VALUES(7, 2, 4, 3);
-INSERT INTO locacoes VALUES(8, 2, 3, 1);
-INSERT INTO locacoes VALUES(9, 1, 1, 1);
-INSERT INTO locacoes VALUES(10, 2, 5, 2);
+INSERT INTO locacoes VALUES(1, 2, 5, 1),
+							(3, 1, 5, 3),
+							(2, 3, 4, 2),
+							(4, 1, 3, 2),
+							(5, 3, 2, 1),
+							(6, 3, 5, 3),
+							(7, 2, 4, 3),
+							(8, 2, 3, 1),
+							(9, 1, 1, 1),
+							(10, 2, 5, 2);
 
 -- Apresentando as tabelas
 SELECT * FROM clientes;
