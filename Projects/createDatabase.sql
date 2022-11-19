@@ -1,12 +1,15 @@
 USE master
 GO
+
 IF NOT EXISTS (
  SELECT name
  FROM sys.databases
  WHERE name = N'NomeDB'
 )
+
  CREATE DATABASE [NomeDB];
 GO
+
 IF SERVERPROPERTY('ProductVersion') > '12'
  ALTER DATABASE [NomeDB] SET QUERY_STORE=ON;
 GO

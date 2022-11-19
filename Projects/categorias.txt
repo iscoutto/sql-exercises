@@ -1,0 +1,13 @@
+Categorias de instruções:
+
+DDL - Data Definition Language
+    • Definir ou modificar tabelas
+
+DML - Data Manipulation Language
+    • Consultas em álgebra relacional
+
+DCL - Data Control Language
+    • Controle de acesso e gerenciamento de permissões
+
+TCL - Transact Control Language
+    • Gerenciamento de mudanças feitas por DML 
