@@ -23,4 +23,5 @@ Project       | Description
 [Subqueries DML](Projects/subqueries_dml.sql)            | Subqueries
 [Exemplo 01](Projects/exemplo01.sql)                     | DDL SQL commands example
 [Create database](Projects/createDatabase.sql)           | Creating a database
-[Lista 02](Projects/lista02.sql)                         | Exercises using DML and joins
+[Lista 02](Projects/lista02.sql)                         | Exercises using joins
+[Lista 03](Projects/lista03.sql)                         | Exercises using subqueries
